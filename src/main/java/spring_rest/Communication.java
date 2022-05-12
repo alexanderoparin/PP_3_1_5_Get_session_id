@@ -20,19 +20,24 @@ public class Communication {
         ResponseEntity<List<User>> responseEntity =
                 restTemplate.exchange(URL, HttpMethod.GET, null,
                         new ParameterizedTypeReference<List<User>>() {});
-        List<User> allUsers = responseEntity.getBody();
-        return allUsers;
-    }
-
-    public User getUserToID() {
-        return null;
+        return responseEntity.getBody();
     }
 
     public void saveUser(User user) {
-
+        Long id = user.getId();
+        if (id == null) {
+            ResponseEntity<String> responseEntity = restTemplate.postForEntity(URL, user, String.class);
+            System.out.println("new user was added");
+            System.out.println(responseEntity.getBody());
+            System.out.println(user);
+        } else {
+            restTemplate.put(URL, user);
+            System.out.println("User with id = " + id + " was edited");
+            System.out.println(user);
+        }
     }
 
-    public void deleteUserToID(int id) {
+    public void deleteUserToID(long id) {
 
     }
 }

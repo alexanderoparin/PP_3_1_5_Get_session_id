@@ -1,8 +1,12 @@
 package spring_rest;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     private Long id;
@@ -13,4 +17,9 @@ public class User {
 
     private Byte age;
 
+    public User(String name, String lastName, Byte age) {
+        this.name = name;
+        this.lastName = lastName;
+        this.age = age;
+    }
 }
