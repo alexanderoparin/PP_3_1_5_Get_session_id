@@ -33,7 +33,7 @@ public class Communication {
         ResponseEntity<String> responseEntityUpdateUser = editUser(user1);
         System.out.println(responseEntityUpdateUser.getBody());
 
-        ResponseEntity<String> responseEntityDeleteUser = deleteUserToID(3L);
+        ResponseEntity<String> responseEntityDeleteUser = deleteUserByID(3L);
         System.out.println(responseEntityDeleteUser.getBody());
     }
 
@@ -65,7 +65,7 @@ public class Communication {
         return responseEntity;
     }
 
-    public ResponseEntity<String> deleteUserToID(long id) {
+    public ResponseEntity<String> deleteUserByID(long id) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.set("Cookie", cookies.stream().collect(Collectors.joining(";")));
         httpHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -74,4 +74,14 @@ public class Communication {
         ResponseEntity<String>responseEntity = restTemplate.exchange(URL + "/" + id, HttpMethod.DELETE, httpEntity, String.class);
         return responseEntity;
     }
+
+    // ResponseEntity это специальный класс, который представляет http-ответ.
+    // Он содержит тело ответа, код состояния, заголовки.
+
+    // RestTemplate - шаблонный класс, осуществляет взаимодействие с большинством RESTful сервисами однострочным заклинанием.
+    // И он может даже привести данные к пользовательским типам.
+
+
+
+
 }
